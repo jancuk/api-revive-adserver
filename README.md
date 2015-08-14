@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/de3/api-revive-adserver.svg?branch=master)](https://travis-ci.org/de3/api-revive-adserver)
+
 # Revive Adserver REST API
 
 ## Overview
