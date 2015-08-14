@@ -9,18 +9,21 @@ class CampaignsController extends BaseController
 {
   public function index(Request $request)
   {
-    $limit = 10;
-    $page  = 1;
+    $limit = $request->input('limit') ? $request->input('limit') : 10;
+    $page  = $request->input('page') ? $request->input('page') : 0;
 
-    if (isset($request->limit))
-      $limit = $request->limit;
-    if (isset($request->page))
-      $page = $request->page;
+    $dataCampaigns = Campaign::take($limit)->offset($page)->get();
+    $total = Campaign::count();
 
-    $dataCampaigns = Campaign::take($limit)->skip($page)->get();
-    $data['campaigns'] = $dataCampaigns;
-    $data['page'] = $page;
-    $data['total'] = count($dataCampaigns);
+    $data = [
+        'meta' => [
+            'page' => $page,
+            'current_total' => count($dataCampaigns),
+            'total' => $total
+        ],
+        'campaigns' => $dataCampaigns
+    ];
+
     return $data;
   }
 
