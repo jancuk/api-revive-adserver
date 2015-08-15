@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\API;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 use App\Campaign;
@@ -9,15 +9,17 @@ class CampaignsController extends BaseController
 {
   public function index(Request $request)
   {
-    $limit = $request->input('limit') ? $request->input('limit') : 10;
-    $page  = $request->input('page') ? $request->input('page') : 0;
+    $limit  = $request->input('limit') ? $request->input('limit') : 10;
+    $page   = $request->input('page') ? $request->input('page') : 1;
 
-    $dataCampaigns = Campaign::take($limit)->offset($page)->get();
-    $total = Campaign::count();
+    $offset = ($page - 1) * $limit;
+
+    $total  = Campaign::count();
+    $dataCampaigns = Campaign::take($limit)->offset($offset)->get();
 
     $data = [
         'meta' => [
-            'page' => $page,
+            'page' => (int)$page,
             'current_total' => count($dataCampaigns),
             'total' => $total
         ],

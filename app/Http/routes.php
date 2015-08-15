@@ -15,4 +15,6 @@ $app->get('/', function() use ($app) {
     return $app->welcome();
 });
 
-$app->get('/campaigns', 'CampaignsController@index');
+$app->group(['namespace' => 'App\Http\Controllers\API', 'prefix' => 'api/v1'], function() use($app) {
+  $app->get('/campaigns', 'CampaignsController@index');
+});
