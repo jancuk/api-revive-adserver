@@ -1,11 +1,12 @@
 <?php
+use App\Models\Campaign;
 
 class CampaignsTest extends TestCase
 {
     public function testResponse()
     {
       $response = $this->call('GET', '/api/v1/campaigns');
-      $this->assertEquals(200, $response->status());
+      $this->assertEquals(200, $response->getStatusCode());
       // $data = json_decode($response->getContent(), true);
       //
       // $this->assertNotEmpty($data['campaigns']);
