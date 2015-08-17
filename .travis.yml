@@ -14,11 +14,11 @@ env:
   - DB_DATABASE=revive_test
 
 before_script:
-  - mysql -e 'create database revive_test2; use revive_test2; source db.sql;'
+  - mysql -e 'create database revive_test; use revive_test; source db.sql;'
+  - mv .env.example .env
 
 install:
    - composer update
-   - composer self-update
    - composer install --dev --prefer-source --no-interaction
 
 script: phpunit --configuration phpunit.xml --coverage-text
