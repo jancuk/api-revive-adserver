@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\API;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
-use App\Campaign;
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
