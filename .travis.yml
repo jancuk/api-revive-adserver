@@ -1,12 +1,24 @@
 language: php
+
 php:
   - 5.5
 
-install:
-   - composer update
-
 env:
   - DB=mysql
-  - DB=pgsql
+  - APP_ENV=testing
+  - DB_CONNECTION=mysql
+  - DB_USERNAME=root
+  - DB_PASSWORD=
+  - DB_HOST=localhost
+  - DB_PORT=3306
+  - DB_DATABASE=revive_test
+
+before_script:
+  - mysql -e 'create database revive_test2; use revive_test2; source db.sql;'
+
+install:
+   - composer update
+   - composer self-update
+   - composer install --dev --prefer-source --no-interaction
 
 script: phpunit --configuration phpunit.xml --coverage-text
